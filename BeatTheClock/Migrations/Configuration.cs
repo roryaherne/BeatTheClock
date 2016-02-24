@@ -43,6 +43,21 @@ namespace BeatTheClock.Migrations
                 new Place { Title = "Table 9", CreatedById = user.Id, DateCreated = DateTime.Now },
                 new Place { Title = "Table 10", CreatedById = user.Id, DateCreated = DateTime.Now }
                 );
+
+            context.ProductTypes.AddOrUpdate( p => p.Title,
+                
+                new ProductType { Title = "Bier", Description = "Bier ist super!", CreatedById = user.Id, DateCreated = DateTime.Now },
+                new ProductType { Title = "Wein", Description = "Wein ist geil!", CreatedById = user.Id, DateCreated = DateTime.Now },
+                new ProductType { Title = "Cocktail", Description = "Für Frauen!", CreatedById = user.Id, DateCreated = DateTime.Now }, 
+                new ProductType { Title = "Whiskey", Description = "Whiskey ist super!", CreatedById = user.Id, DateCreated = DateTime.Now },
+                new ProductType { Title = "Likör", Description = "Likör ist gefährlich!", CreatedById = user.Id, DateCreated = DateTime.Now },
+                new ProductType { Title = "Limonade", Description = "Süß", CreatedById = user.Id, DateCreated = DateTime.Now }
+                );
+
+            context.OrderStates.AddOrUpdate(o => o.Title,
+                
+                new OrderState { Title = "Ordered", Description = "Ordered", CreatedById = user.Id, DateCreated = DateTime.Now }
+                );
         }
     }
 }
