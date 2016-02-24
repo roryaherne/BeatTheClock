@@ -7,115 +7,116 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using BeatTheClock.Models;
+using BeatTheClock.Models.DBEntities;
 
 namespace BeatTheClock.Controllers
 {
-    public class ProductsController : Controller
+    public class PlacesController : Controller
     {
-        private BarContext db = new BarContext();
+        private ApplicationDbContext db = new ApplicationDbContext();
 
-        // GET: Products
+        // GET: Places
         public ActionResult Index()
         {
-            var products = db.Products.Include(p => p.ProductType);
-            return View(products.ToList());
+            var places = db.Places.Include(p => p.CreatedBy);
+            return View(places.ToList());
         }
 
-        // GET: Products/Details/5
+        // GET: Places/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Product product = db.Products.Find(id);
-            if (product == null)
+            Place place = db.Places.Find(id);
+            if (place == null)
             {
                 return HttpNotFound();
             }
-            return View(product);
+            return View(place);
         }
 
-        // GET: Products/Create
+        // GET: Places/Create
         public ActionResult Create()
         {
-            ViewBag.ProductTypeId = new SelectList(db.ProductTypes, "ProductTypeId", "Title");
+            ViewBag.CreatedById = new SelectList(db.Users, "Id", "Email");
             return View();
         }
 
-        // POST: Products/Create
+        // POST: Places/Create
         // Aktivieren Sie zum Schutz vor übermäßigem Senden von Angriffen die spezifischen Eigenschaften, mit denen eine Bindung erfolgen soll. Weitere Informationen 
         // finden Sie unter http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ProductId,Title,ProductTypeId")] Product product)
+        public ActionResult Create([Bind(Include = "PlaceId,Title,CreatedById")] Place place)
         {
             if (ModelState.IsValid)
             {
-                db.Products.Add(product);
+                db.Places.Add(place);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.ProductTypeId = new SelectList(db.ProductTypes, "ProductTypeId", "Title", product.ProductTypeId);
-            return View(product);
+            ViewBag.CreatedById = new SelectList(db.Users, "Id", "Email", place.CreatedById);
+            return View(place);
         }
 
-        // GET: Products/Edit/5
+        // GET: Places/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Product product = db.Products.Find(id);
-            if (product == null)
+            Place place = db.Places.Find(id);
+            if (place == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.ProductTypeId = new SelectList(db.ProductTypes, "ProductTypeId", "Title", product.ProductTypeId);
-            return View(product);
+            ViewBag.CreatedById = new SelectList(db.Users, "Id", "Email", place.CreatedById);
+            return View(place);
         }
 
-        // POST: Products/Edit/5
+        // POST: Places/Edit/5
         // Aktivieren Sie zum Schutz vor übermäßigem Senden von Angriffen die spezifischen Eigenschaften, mit denen eine Bindung erfolgen soll. Weitere Informationen 
         // finden Sie unter http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ProductId,Title,ProductTypeId")] Product product)
+        public ActionResult Edit([Bind(Include = "PlaceId,Title,CreatedById")] Place place)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(product).State = EntityState.Modified;
+                db.Entry(place).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.ProductTypeId = new SelectList(db.ProductTypes, "ProductTypeId", "Title", product.ProductTypeId);
-            return View(product);
+            ViewBag.CreatedById = new SelectList(db.Users, "Id", "Email", place.CreatedById);
+            return View(place);
         }
 
-        // GET: Products/Delete/5
+        // GET: Places/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Product product = db.Products.Find(id);
-            if (product == null)
+            Place place = db.Places.Find(id);
+            if (place == null)
             {
                 return HttpNotFound();
             }
-            return View(product);
+            return View(place);
         }
 
-        // POST: Products/Delete/5
+        // POST: Places/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Product product = db.Products.Find(id);
-            db.Products.Remove(product);
+            Place place = db.Places.Find(id);
+            db.Places.Remove(place);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

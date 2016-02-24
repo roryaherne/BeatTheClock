@@ -1,4 +1,4 @@
-﻿@model BeatTheClock.Models.ProductType
+﻿@model BeatTheClock.Models.DBEntities.Place
 
 @{
     ViewBag.Title = "Details";
@@ -7,9 +7,17 @@
 <h2>Details</h2>
 
 <div>
-    <h4>ProductType</h4>
+    <h4>Place</h4>
     <hr />
     <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.CreatedBy.Email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreatedBy.Email)
+        </dd>
+
         <dt>
             @Html.DisplayNameFor(model => model.Title)
         </dt>
@@ -21,6 +29,6 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.ProductTypeId }) |
+    @Html.ActionLink("Edit", "Edit", new { id = Model.PlaceId }) |
     @Html.ActionLink("Back to List", "Index")
 </p>

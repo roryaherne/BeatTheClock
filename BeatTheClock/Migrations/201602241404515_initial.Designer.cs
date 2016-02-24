@@ -13,7 +13,7 @@ namespace BeatTheClock.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201602220916021_initial"; }
+            get { return "201602241404515_initial"; }
         }
         
         string IMigrationMetadata.Source
