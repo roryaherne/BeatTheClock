@@ -15,6 +15,9 @@ namespace BeatTheClock.Models.DBEntities
         public string Title { get; set; }
         public DateTime DateCreated { get; set; }
 
+        [Display(Name = "Seats")]
+        public int Capacity { get; set; }
+
         //foreign keys
         public string CreatedById { get; set; }
 

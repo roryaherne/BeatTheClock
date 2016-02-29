@@ -17,9 +17,11 @@ namespace BeatTheClock.Models.DBEntities
         [StringLength(512, MinimumLength = 1)]
         public string Description { get; set; }
 
-        public TimeSpan ExperationPeriod { get; set; }
+        public int ExperationPeriod { get; set; }
 
         public byte[] Image { get; set; }
+
+        public DateTime DateCreated { get; set; }
 
         //navigation properties
         public int StockUnitId { get; set; }

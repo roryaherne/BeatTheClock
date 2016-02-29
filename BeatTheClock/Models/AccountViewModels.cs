@@ -70,6 +70,10 @@ namespace BeatTheClock.Models
         public string Email { get; set; }
 
         [Required]
+        [Display(Name = "Username")]
+        public string UserName { get; set; }
+
+        [Required]
         [StringLength(100, ErrorMessage = "\"{0}\" muss mindestens {2} Zeichen lang sein.", MinimumLength = 6)]
         [DataType(DataType.Password)]
         [Display(Name = "Kennwort")]

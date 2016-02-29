@@ -12,12 +12,13 @@ namespace BeatTheClock.Models.DBEntities
 
         [StringLength(255, MinimumLength = 1)]
         [Required]
-        public string Name { get; set; }
+        public string Title { get; set; }
 
         [StringLength(128, MinimumLength = 1)]
         public string ShortName { get; set; }
         public string Description { get; set; }
         public double BasisFactor { get; set; }
+        public DateTime DateCreated { get; set; }
 
         //foreign keys
         public string CreatedById { get; set; }

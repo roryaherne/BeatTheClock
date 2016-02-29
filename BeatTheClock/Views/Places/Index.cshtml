@@ -1,39 +1,34 @@
 ﻿@model IEnumerable<BeatTheClock.Models.DBEntities.Place>
+@using System.Web.Mvc
 
 @{
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2>Tische</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.CreatedBy.Email)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Title)
-        </th>
-        <th></th>
-    </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.CreatedBy.Email)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Title)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.PlaceId }) |
-            @Html.ActionLink("Details", "Details", new { id=item.PlaceId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.PlaceId })
-        </td>
-    </tr>
-}
+<div class="row">
+    @foreach (var item in Model) {
+        <div class="col-md-4 col-sm-6">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    @Html.DisplayFor(modelItem => item.Title)
+                </div>
+                <div class="panel-body">
+                    @*@Html.DisplayNameFor(modelItem => item.Capacity)*@
+                    <span>Capacity: </span>
+                    @Html.DisplayFor(modelItem => item.Capacity)
+                </div>
+            </div>
+        </div>
+    }
+</div>
 
-</table>
+
+@*@Html.ActionLink("Edit", "Edit", new { id = item.PlaceId }) |
+@Html.ActionLink("Details", "Details", new { id = item.PlaceId }) |
+@Html.ActionLink("Delete", "Delete", new { id = item.PlaceId })*@
