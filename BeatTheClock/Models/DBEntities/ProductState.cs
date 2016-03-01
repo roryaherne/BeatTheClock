@@ -9,6 +9,10 @@ namespace BeatTheClock.Models.DBEntities
 {
     public class ProductState
     {
+        public ProductState()
+        {
+            Products = new List<Product>();
+        }
         public int ProductStateId { get; set; }
 
         [Required]
@@ -18,13 +22,17 @@ namespace BeatTheClock.Models.DBEntities
         [StringLength(512, MinimumLength = 1)]
         public string Description { get; set; }
 
+        [Required]
         public DateTime DateCreated { get; set; }
 
         //foreign keys
+        [Required]
         public string CreatedById { get; set; }
 
         //navigation properties
-        public virtual ICollection<Product> Products { get; set; }
+        [ForeignKey("CreatedById")]
         public virtual ApplicationUser CreatedBy { get; set; }
+
+        public virtual ICollection<Product> Products { get; set; }
     }
 }

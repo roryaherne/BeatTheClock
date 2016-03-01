@@ -12,23 +12,30 @@
 </p>
 
 <div class="row">
-    @foreach (var item in Model) {
+    @foreach (var item in Model)
+    {
         <div class="col-md-4 col-sm-6">
             <div class="panel panel-default">
                 <div class="panel-heading">
                     @Html.DisplayFor(modelItem => item.Title)
                 </div>
+                @{
+                    double sum = item.Orders.Select(o => o.UnitPrice).Sum();
+                    string color = sum > 0 ? "red" : "green";
+                }
                 <div class="panel-body">
-                    @*@Html.DisplayNameFor(modelItem => item.Capacity)*@
-                    <span>Capacity: </span>
-                    @Html.DisplayFor(modelItem => item.Capacity)
+                    <p>Capacity: @Html.DisplayFor(modelItem => item.Capacity)</p>
+                    <p>
+                        Order Sum: €@Html.DisplayFor(m => sum)
+                    </p>
+                    <div class="@color"></div>
                 </div>
             </div>
         </div>
-    }
+                    }
 </div>
 
 
 @*@Html.ActionLink("Edit", "Edit", new { id = item.PlaceId }) |
-@Html.ActionLink("Details", "Details", new { id = item.PlaceId }) |
-@Html.ActionLink("Delete", "Delete", new { id = item.PlaceId })*@
+    @Html.ActionLink("Details", "Details", new { id = item.PlaceId }) |
+    @Html.ActionLink("Delete", "Delete", new { id = item.PlaceId })*@
